@@ -14,13 +14,14 @@ class Chart extends StatelessWidget {
         ),
       );
       var totalSum = 0.0;
-      for (var i = 0; i <= recentTransactions.length; i++) {
+      for (var i = 0; i < recentTransactions.length; i++) {
         if (recentTransactions[i].date.day == weekDay.day &&
             recentTransactions[i].date.month == weekDay.month &&
             recentTransactions[i].date.year == weekDay.year) {
           totalSum += recentTransactions[i].amount;
         }
       }
+
       print(DateFormat.E().format(weekDay));
       print(totalSum);
 
@@ -33,11 +34,14 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(groupedTransactionValues);
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
       child: Row(
-        children: [],
+        children: groupedTransactionValues.map((data) {
+          return Text('${data['day']}: ${data['amount']}');
+        }).toList(),
       ),
     );
   }
